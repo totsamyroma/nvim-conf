@@ -1,6 +1,7 @@
 require('me')
 require('config.lazy')
 
+require('config.auto_session')
 require('config.fugitive')
 require('config.gitsigns')
 require('config.lsp_zero')
