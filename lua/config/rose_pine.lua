@@ -1,4 +1,6 @@
-require('rose-pine').setup({
+local plugin = require('rose-pine')
+
+plugin.setup({
     variant = 'main',
     enable = {
         terminal = true,
@@ -7,14 +9,13 @@ require('rose-pine').setup({
         panel = "base",
     },
     highlight_groups = {
-        -- Comment = { fg = "foam" },
-        -- StatusLine = { fg = "love", bg = "love", blend = 15 },
-        -- VertSplit = { fg = "muted", bg = "muted" },
-        -- Visual = { fg = "base", bg = "text", inherit = false },
-        TelescopeBorder = { fg = "#6e6a86", bg = "none" },
-        FloatBorder = { fg = "#6e6a86", bg = "none" },
+        TelescopeBorder = { bg = "none" },
+        FloatBorder = { bg = "none" },
+        Pmenu = { bg = "surface" },
+        PmenuSel = { bg = "highlight_med" },
+        PmenuSbar = { bg = "overlay" },
+        PmenuThumb = { bg = "muted" },
     },
 })
 
 vim.cmd("colorscheme rose-pine")
-
