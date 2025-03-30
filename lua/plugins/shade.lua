@@ -1,3 +1,3 @@
 return {
-    'sunjon/shade.nvim',
+    'totsamyroma/Shade.nvim',
 }
