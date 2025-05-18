@@ -45,13 +45,13 @@ lspconfig.lua_ls.setup({})
 lspconfig.lua_ls.setup({})
 
 lspconfig.solargraph.setup({
-	root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+	root_dir = lspconfig.util.root_pattern("*.rb", "Gemfile", ".git"),
      settings = {
      	solargraph = {
      		autoformat = true,
      		completion = true,
-     		diagnostic = false,
-     		folding = false,
+     		diagnostic = true,
+     		folding = true,
      		references = true,
      		rename = true,
      		symbols = true
@@ -94,3 +94,19 @@ cmp.setup.filetype({ 'sql', 'mysql' }, {
 		{name = 'vim-dadbod-completion'},
 	},
 })
+
+vim.lsp.enable('bashls')
+vim.lsp.enable('docker_compose_language_service')
+vim.lsp.enable('dockerls')
+vim.lsp.enable('elixir')
+vim.lsp.enable('eslint')
+vim.lsp.enable('html')
+vim.lsp.enable('htmx')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('nextls')
+vim.lsp.enable('pylsp')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('tailwindcss')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('vuels')
+vim.lsp.enable('yamlls')
