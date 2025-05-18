@@ -1,9 +1,9 @@
 require('me.remap')
 require('me.cabbrevs')
+require('me.gcode_syntax')
 
 -- share buffer clipboard with system clipboard
 vim.opt.clipboard:append { 'unnamedplus' }
-
 -- enable numbers and relative line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -33,3 +33,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
     command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None',     pattern = { "*" },
 })
+
+vim.api.nvim_create_augroup('gcode', { clear = true })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = 'gcode',
+  pattern = '*.gcode',
+  command = 'set filetype=gcode',
+})
+
