@@ -1,4 +1,5 @@
 require('me.remap')
+require('me.commands')
 require('me.cabbrevs')
 require('me.gcode_syntax')
 
