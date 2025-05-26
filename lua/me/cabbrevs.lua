@@ -10,7 +10,7 @@ vim.cmd('cabbrev gpf Git push -f')
 vim.cmd('cabbrev gpl Git pull')
 vim.cmd('cabbrev gs Git status')
 vim.cmd('cabbrev grb Git rebase')
-vim.cmd('cabbrev blame Git blame')
+vim.cmd('cabbrev gbl Git blame')
 
 -- abbr for :Cop
 vim.cmd('cabbrev cop Cop')
