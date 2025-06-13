@@ -20,3 +20,6 @@ vim.cmd('cabbrev spec Spec')
 
 -- abbr for :Lazy
 vim.cmd('cabbrev lu Lazy update')
+
+-- abbr for :ChatGPT
+vim.cmd('cabbrev chat ChatGPT')
