@@ -9,14 +9,14 @@ require("obsidian").setup {
   workspaces = {
     {
       name = "personal",
-      path = "~/Documents/obsidian/vaults/personal",
+      path = "~/Documents/Obsidian/personal",
       overrides = {
         notes_subdir = "notes",
       },
     },
     {
       name = "work",
-      path = "~/Documents/obsidian/vaults/work",
+      path = "~/Documents/Obsidian/work",
       -- Optional, override certain settings.
       overrides = {
         notes_subdir = "notes",
@@ -164,13 +164,13 @@ require("obsidian").setup {
   end,
 
   -- Optional, for templates (see https://github.com/obsidian-nvim/obsidian.nvim/wiki/Using-templates)
-  templates = {
-    folder = "templates",
-    date_format = "%Y-%m-%d",
-    time_format = "%H:%M",
-    -- A map for custom variables, the key should be the variable and the value a function
-    substitutions = {},
-  },
+  -- templates = {
+  --   folder = "templates",
+  --   date_format = "%Y-%m-%d",
+  --   time_format = "%H:%M",
+  --   -- A map for custom variables, the key should be the variable and the value a function
+  --   substitutions = {},
+  -- },
 
   -- Sets how you follow URLs
   ---@param url string
@@ -185,13 +185,6 @@ require("obsidian").setup {
     vim.ui.open(img)
     -- vim.ui.open(img, { cmd = { "loupe" } })
   end,
-
-  -- Optional, set to true if you use the Obsidian Advanced URI plugin.
-  -- https://github.com/Vinzent03/obsidian-advanced-uri
-  use_advanced_uri = false,
-
-  -- Optional, set to true to force ':Obsidian open' to bring the app to the foreground.
-  open_app_foreground = false,
 
   picker = {
     -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', 'mini.pick' or 'snacks.pick'.
