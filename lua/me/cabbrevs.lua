@@ -17,3 +17,6 @@ vim.cmd('cabbrev cop Cop')
 
 -- abbr for :Spec
 vim.cmd('cabbrev spec Spec')
+
+-- abbr for :Lazy
+vim.cmd('cabbrev lu Lazy update')
