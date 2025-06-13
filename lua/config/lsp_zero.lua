@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+    vim.keymap.set('n', 'f', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   end,
 })
@@ -42,8 +42,6 @@ local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup({})
 
 -- lsp for ruby with formatting and autoindentaion
-lspconfig.lua_ls.setup({})
-
 lspconfig.solargraph.setup({
 	root_dir = lspconfig.util.root_pattern("*.rb", "Gemfile", ".git"),
      settings = {
@@ -108,5 +106,12 @@ vim.lsp.enable('pylsp')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('tailwindcss')
 vim.lsp.enable('ts_ls')
+lspconfig.ts_ls.setup({
+  settings = {
+    tsserver = {
+      autoformat = true,
+    },
+  },
+})
 vim.lsp.enable('vuels')
 vim.lsp.enable('yamlls')
