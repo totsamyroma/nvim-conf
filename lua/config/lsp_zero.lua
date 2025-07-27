@@ -19,7 +19,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = {buffer = event.buf}
+    local opts = { buffer = event.buf }
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
@@ -36,36 +36,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- You'll find a list of language servers here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
--- These are example language servers. 
+-- These are example language servers.
 local lspconfig = require('lspconfig')
 
 lspconfig.lua_ls.setup({})
 
 -- lsp for ruby with formatting and autoindentaion
-lspconfig.solargraph.setup({
-	root_dir = lspconfig.util.root_pattern("*.rb", "Gemfile", ".git"),
-     settings = {
-     	solargraph = {
-     		autoformat = true,
-     		completion = true,
-     		diagnostic = true,
-     		folding = true,
-     		references = true,
-     		rename = true,
-     		symbols = true
-     	}
-     },
-     reporters = {"rubocop"},
-     	on_attach = function(client, bufnr)
-		-- Enable formatting on save
-		if client.server_capabilities.documentFormattingProvider then
-			vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.format()')
-			-- Optionally bind to a key for manual formatting
-			vim.keymap.set('n', '<Leader>f', function()
-				vim.lsp.buf.format({ async = true })
-			end, { buffer = bufnr })
-		end
-	end,
+lspconfig.ruby_lsp.setup({
+  cmd_env = {
+    BUNDLE_GEMFILE = '.ruby-lsp/Gemfile',
+  },
+  cmd = { 'bundle', 'exec', 'ruby-lsp' },
+  init_options = {
+    formatter = 'rubocop_internal',
+    linters = { 'rubocop_internal' },
+  },
+  settings = {
+    ruby = {
+      format = {
+        enabled = true,
+      },
+      lsp = {
+        autoformat = true,
+      },
+    },
+  },
+  on_attach = function(client, bufnr)
+    -- Enable formatting on save
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ async = true })
+      end,
+    })
+  end,
 })
 
 lspconfig.gleam.setup({})
@@ -74,38 +78,41 @@ lspconfig.ocamllsp.setup({})
 local cmp = require('cmp')
 
 cmp.setup({
-	sources = {
-		{name = 'nvim_lsp'},
-	},
-	snippet = {
-		expand = function(args)
-			-- You need Neovim v0.10 to use vim.snippet
-			vim.snippet.expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({}),
+  sources = {
+    { name = 'nvim_lsp' },
+  },
+  snippet = {
+    expand = function(args)
+      -- You need Neovim v0.10 to use vim.snippet
+      vim.snippet.expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({}),
 })
 
 cmp.setup.filetype({ 'sql', 'mysql' }, {
-	sources = {
-		{name = 'nvim_lsp'},
-		{name = 'vim-dadbod-completion'},
-	},
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vim-dadbod-completion' },
+  },
 })
 
-vim.lsp.enable('bashls')
-vim.lsp.enable('docker_compose_language_service')
-vim.lsp.enable('dockerls')
-vim.lsp.enable('elixir')
-vim.lsp.enable('eslint')
-vim.lsp.enable('html')
-vim.lsp.enable('htmx')
-vim.lsp.enable('jsonls')
-vim.lsp.enable('nextls')
-vim.lsp.enable('pylsp')
-vim.lsp.enable('rust_analyzer')
-vim.lsp.enable('tailwindcss')
-vim.lsp.enable('ts_ls')
+lspconfig.bashls.setup({})
+lspconfig.cmake.setup({})
+lspconfig.clangd.setup({})
+lspconfig.elixirls.setup({})
+lspconfig.eslint.setup({})
+lspconfig.html.setup({})
+lspconfig.htmx.setup({})
+lspconfig.jsonls.setup({})
+lspconfig.vimls.setup({})
+lspconfig.vuels.setup({})
+-- lspconfig.yamlsp.setup({})
+lspconfig.tailwindcss.setup({})
+lspconfig.rust_analyzer.setup({})
+lspconfig.pylsp.setup({})
+lspconfig.nextls.setup({})
+
 lspconfig.ts_ls.setup({
   settings = {
     tsserver = {
@@ -113,5 +120,3 @@ lspconfig.ts_ls.setup({
     },
   },
 })
-vim.lsp.enable('vuels')
-vim.lsp.enable('yamlls')

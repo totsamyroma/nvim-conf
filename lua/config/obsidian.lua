@@ -22,6 +22,22 @@ require("obsidian").setup {
         notes_subdir = "notes",
       },
     },
+    {
+      name = "jetfin",
+      path = "~/Documents/Obsidian/work/jetfin",
+      -- Optional, override certain settings.
+      overrides = {
+        notes_subdir = "notes",
+      },
+    },
+    {
+      name = "taxdome",
+      path = "~/Documents/Obsidian/work/taxdome",
+      -- Optional, override certain settings.
+      overrides = {
+        notes_subdir = "notes",
+      },
+    },
   },
 
   -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
@@ -324,3 +340,6 @@ require("obsidian").setup {
     format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
   },
 }
+
+vim.keymap.set("n", "<leader>ow", ":ObsidianWorkspace<CR>")
+vim.keymap.set("n", "<leader>of", ":ObsidianSearch<CR>")

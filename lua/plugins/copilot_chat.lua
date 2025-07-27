@@ -7,6 +7,15 @@ return {
     },
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
+      mappings = {
+        complete = {
+          insert = "<C-n>",
+        },
+        reset = {
+          insert = "<C-r>",
+          normal = "<C-r>",
+        },
+      }
       -- See Configuration section for options
     },
     -- See Commands section for default commands if you want to lazy load on them
