@@ -1,4 +1,5 @@
 require("obsidian").setup {
+  legacy_commands = false,
   -- A list of workspace names, paths, and configuration overrides.
   -- If you use the Obsidian app, the 'path' of a workspace should generally be
   -- your vault root (where the `.obsidian` folder is located).
@@ -74,32 +75,6 @@ require("obsidian").setup {
     blink = false,
     -- Trigger completion at 2 chars.
     min_chars = 2,
-  },
-
-  -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
-  -- way then set 'mappings = {}'.
-  mappings = {
-    -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-    ["gf"] = {
-      action = function()
-        return require("obsidian").util.gf_passthrough()
-      end,
-      opts = { noremap = false, expr = true, buffer = true },
-    },
-    -- Toggle check-boxes.
-    ["<leader>ch"] = {
-      action = function()
-        return require("obsidian").util.toggle_checkbox()
-      end,
-      opts = { buffer = true },
-    },
-    -- Smart action depending on context: follow link, show notes with tag, toggle checkbox, or toggle heading fold
-    ["<cr>"] = {
-      action = function()
-        return require("obsidian").util.smart_action()
-      end,
-      opts = { buffer = true, expr = true },
-    },
   },
 
   -- Where to put new notes. Valid options are
@@ -265,12 +240,9 @@ require("obsidian").setup {
 
   -- Optional, configure additional syntax highlighting / extmarks.
   -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
-  ui = {
-    enable = true, -- set to false to disable all additional syntax features
-    update_debounce = 200, -- update delay after a text change (in milliseconds)
-    max_file_length = 5000, -- disable UI features for files with more than this many lines
+  checkbox = {
     -- Define how various check-boxes are displayed
-    checkboxes = {
+    order = {
       -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
       [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
       ["x"] = { char = "", hl_group = "ObsidianDone" },
@@ -283,6 +255,11 @@ require("obsidian").setup {
 
       -- You can also add more custom ones...
     },
+  },
+  ui = {
+    enable = true, -- set to false to disable all additional syntax features
+    update_debounce = 200, -- update delay after a text change (in milliseconds)
+    max_file_length = 5000, -- disable UI features for files with more than this many lines
     -- Use bullet marks for non-checkbox lists.
     bullets = { char = "•", hl_group = "ObsidianBullet" },
     external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
@@ -335,7 +312,7 @@ require("obsidian").setup {
   },
 
   -- See https://github.com/obsidian-nvim/obsidian.nvim/wiki/Notes-on-configuration#statusline-component
-  statusline = {
+  footer = {
     enabled = true,
     format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
   },
