@@ -318,5 +318,5 @@ require("obsidian").setup {
   },
 }
 
-vim.keymap.set("n", "<leader>ow", ":ObsidianWorkspace<CR>")
-vim.keymap.set("n", "<leader>of", ":ObsidianSearch<CR>")
+vim.keymap.set("n", "<leader>ow", ":Obsidian workspace<CR>")
+vim.keymap.set("n", "<leader>of", ":Obsidian search<CR>")
