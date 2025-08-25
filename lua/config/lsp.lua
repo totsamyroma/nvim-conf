@@ -46,7 +46,7 @@ lspconfig.ruby_lsp.setup({
   cmd_env = {
     BUNDLE_GEMFILE = '.ruby-lsp/Gemfile',
   },
-  cmd = { 'bundle', 'exec', 'ruby-lsp' },
+  cmd = { 'sh', '-c', 'bundle install > /dev/null; bundle exec ruby-lsp' },
   init_options = {
     formatter = 'rubocop_internal',
     linters = { 'rubocop_internal' },
@@ -102,6 +102,7 @@ lspconfig.cmake.setup({})
 lspconfig.clangd.setup({})
 lspconfig.elixirls.setup({})
 lspconfig.eslint.setup({})
+lspconfig.gopls.setup({})
 lspconfig.html.setup({})
 lspconfig.htmx.setup({})
 lspconfig.jsonls.setup({})
