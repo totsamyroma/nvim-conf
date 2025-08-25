@@ -20,7 +20,9 @@ return {
       -- See Configuration section for options
       window = {
         layout = 'horizontal', -- 'horizontal' or 'vertical'
-      }
+      },
+      temperature = 0.1,           -- Lower = focused, higher = creative
+      auto_insert_mode = true,     -- Enter insert mode when opening
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
