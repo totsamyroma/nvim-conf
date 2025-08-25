@@ -11,13 +11,13 @@ function setCurrentWindow(win)
 end
 
 function withActiveWindowSwap(fun)
-    local win = getCurrentWindow()
-    fun()
-    local chatgpt_win = getCurrentWindow()
-    setCurrentWindow(win)
-    setCurrentWindow(chatgpt_win)
+  local win = getCurrentWindow()
+  fun()
+  local chatgpt_win = getCurrentWindow()
+  setCurrentWindow(win)
+  setCurrentWindow(chatgpt_win)
 end
 
 vim.api.nvim_create_user_command("ChatGPT", function()
-    withActiveWindowSwap(plugin.openChat)
+  withActiveWindowSwap(plugin.openChat)
 end, {})
