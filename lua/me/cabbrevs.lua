@@ -1,3 +1,9 @@
+-- abbr for :ChatGPT
+vim.cmd('cabbrev chat ChatGPT')
+
+-- abbr for :Cop
+vim.cmd('cabbrev cop Cop')
+
 -- abbr for :Git
 vim.cmd('cabbrev ga Git add')
 vim.cmd('cabbrev gcm Git commit -m')
@@ -13,14 +19,12 @@ vim.cmd('cabbrev gs Git status')
 vim.cmd('cabbrev grb Git rebase')
 vim.cmd('cabbrev gbl Git blame')
 
--- abbr for :Cop
-vim.cmd('cabbrev cop Cop')
+-- abbr for :Lazy
+vim.cmd('cabbrev lu Lazy update')
+
+-- abbr for :NoNeckPain
+vim.cmd('cabbrev np NoNeckPain')
 
 -- abbr for :Spec
 vim.cmd('cabbrev spec Spec')
 
--- abbr for :Lazy
-vim.cmd('cabbrev lu Lazy update')
-
--- abbr for :ChatGPT
-vim.cmd('cabbrev chat ChatGPT')
