@@ -1,4 +1,4 @@
-vim.g.netrw_keepdir = 0
+vim.g.netrw_keepdir = 1
 
 -- Change workinig diirectory to the directory of the current buffer
 vim.api.nvim_create_autocmd("BufEnter", {
