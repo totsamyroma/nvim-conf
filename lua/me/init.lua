@@ -2,6 +2,7 @@ require('me.remap')
 require('me.commands')
 require('me.cabbrevs')
 require('me.gcode_syntax')
+require('me.fold')
 
 -- share buffer clipboard with system clipboard
 vim.opt.clipboard:append { 'unnamedplus' }
