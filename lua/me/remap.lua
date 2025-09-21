@@ -11,3 +11,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- open split window and put it right/below
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- copy absolute and relative current file path to clipboard
+vim.keymap.set('n', '<leader>capath', ':let @+=expand("%:p")<CR>')
+vim.keymap.set('n', '<leader>crpath', ':let @+=expand("%")<CR>')
