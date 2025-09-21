@@ -5,15 +5,6 @@
 -- Reserve a space in the gutter
 vim.opt.signcolumn = 'yes'
 
--- Add cmp_nvim_lsp capabilities settings to lspconfig
--- This should be executed before you configure any language server
-local lspconfig_defaults = require('lspconfig').util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lspconfig_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
-
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -37,43 +28,73 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- You'll find a list of language servers here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 -- These are example language servers.
-local lspconfig = require('lspconfig')
 
-lspconfig.lua_ls.setup({})
+vim.lsp.enable('lua_ls', {})
 
 -- lsp for ruby with formatting and autoindentaion
-lspconfig.ruby_lsp.setup({
-  cmd_env = {
-    BUNDLE_GEMFILE = '.ruby-lsp/Gemfile',
-  },
-  cmd = { 'sh', '-c', 'bundle install > /dev/null; bundle exec ruby-lsp' },
-  init_options = {
-    formatter = 'rubocop_internal',
-    linters = { 'rubocop_internal' },
-  },
-  settings = {
-    ruby = {
-      format = {
-        enabled = true,
-      },
-      lsp = {
-        autoformat = true,
+vim.lsp.config(
+  'rubocop',
+  {
+    cmd_env = { BUNDLE_GEMFILE = '.ruby-lsp/Gemfile' },
+    cmd = { 'sh', '-c', 'bundle install > /dev/null; bundle exec rubocop --lsp' },
+    settings = {
+      ruby = {
+        format = { enabled = true },
+        lsp = { autoformat = true },
       },
     },
-  },
-  on_attach = function(client, bufnr)
-    -- Enable formatting on save
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ async = true })
-      end,
-    })
-  end,
-})
+    on_attach = function(client, bufnr)
+      -- Enable formatting on save
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = true })
+        end,
+      })
+    end,
+  }
+)
+vim.lsp.enable('rubocop', {})
 
-lspconfig.gleam.setup({})
-lspconfig.ocamllsp.setup({})
+vim.lsp.config(
+  'ruby_lsp',
+  {
+    cmd_env = { BUNDLE_GEMFILE = '.ruby-lsp/Gemfile', },
+    cmd = { 'sh', '-c', 'bundle install > /dev/null; bundle exec ruby-lsp' },
+    init_options = {
+      enabledFeatures = {
+        codeActions = true,
+        codeLens = true,
+        completion = true,
+        definition = true,
+        diagnostics = true,
+        documentHighlights = true,
+        documentLink = true,
+        documentSymbols = true,
+        foldingRanges = true,
+        formatting = false,
+        hover = true,
+        inlayHint = true,
+        onTypeFormatting = true,
+        selectionRanges = true,
+        semanticHighlighting = true,
+        signatureHelp = true,
+        typeHierarchy = true,
+        workspaceSymbol = true
+      },
+      featuresConfiguration = {
+        inlayHint = {
+          implicitHashValue = true,
+          implicitRescue = true
+        }
+      },
+      experimentalFeaturesEnabled = false,
+      linters = { "" },
+      formatters = { "" },
+    }
+  }
+)
+vim.lsp.enable('ruby_lsp', {})
 
 local cmp = require('cmp')
 
@@ -97,27 +118,26 @@ cmp.setup.filetype({ 'sql', 'mysql' }, {
   },
 })
 
-lspconfig.bashls.setup({})
-lspconfig.cmake.setup({})
-lspconfig.clangd.setup({})
-lspconfig.elixirls.setup({})
-lspconfig.eslint.setup({})
-lspconfig.gopls.setup({})
-lspconfig.html.setup({})
-lspconfig.htmx.setup({})
-lspconfig.jsonls.setup({})
-lspconfig.vimls.setup({})
-lspconfig.vuels.setup({})
--- lspconfig.yamlsp.setup({})
-lspconfig.tailwindcss.setup({})
-lspconfig.rust_analyzer.setup({})
-lspconfig.pylsp.setup({})
-lspconfig.nextls.setup({})
-
-lspconfig.ts_ls.setup({
+vim.lsp.enable('bashls', {})
+vim.lsp.enable('cmake', {})
+vim.lsp.enable('clangd', {})
+vim.lsp.enable('elixirls', {})
+vim.lsp.enable('eslint', {})
+vim.lsp.enable('gopls', {})
+vim.lsp.enable('html', {})
+vim.lsp.enable('htmx', {})
+vim.lsp.enable('jsonls', {})
+vim.lsp.enable('nextls', {})
+vim.lsp.enable('pylsp', {})
+vim.lsp.enable('rust_analyzer', {})
+vim.lsp.enable('tailwindcss', {})
+vim.lsp.enable('ts_ls', {
   settings = {
     tsserver = {
       autoformat = true,
     },
   },
 })
+vim.lsp.enable('vimls', {})
+vim.lsp.enable('vuels', {})
+vim.lsp.enable('yamlls', {})
