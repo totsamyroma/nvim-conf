@@ -2,6 +2,7 @@ require('me')
 require('config.lazy')
 
 require('config.auto_session')
+require('config.blink')
 require('config.chatgpt')
 require('config.copilot')
 require('config.fugitive')
