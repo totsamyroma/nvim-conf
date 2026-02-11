@@ -18,3 +18,11 @@ vim.opt.splitbelow = true
 -- copy absolute and relative current file path to clipboard
 vim.keymap.set('n', '<leader>capath', ':let @+=expand("%:p")<CR>')
 vim.keymap.set('n', '<leader>crpath', ':let @+=expand("%")<CR>')
+
+vim.keymap.set('n', 'gwd', function()
+    local word = vim.fn.expand('<cword>')
+    if word:match('^[A-Z]') then
+      vim.notify('Looking up: ' .. word .. ' (definition)', vim.log.levels.INFO)
+      vim.lsp.buf.definition()
+    end
+  end)
