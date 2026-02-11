@@ -28,13 +28,23 @@ vim.opt.expandtab = true
 
 -- refresh file after external change
 vim.opt.autoread = true
+vim.opt.updatetime = 250
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
     command = "if mode() != 'c' | checktime | endif",
     pattern = { "*" },
 })
 vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-    command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None',     pattern = { "*" },
+    callback = function()
+        vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+    end,
+    pattern = { "*" },
 })
+local timer = vim.uv.new_timer()
+timer:start(500, 500, vim.schedule_wrap(function()
+    if vim.fn.getcmdwintype() == '' then
+        vim.cmd('silent! checktime')
+    end
+end))
 
 vim.api.nvim_create_augroup('gcode', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
